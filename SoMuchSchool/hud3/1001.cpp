@@ -67,7 +67,6 @@ ll dp(ll l,ll r) {
 	return ans[l][r];
 }
 
-const int N=1e3+5;
 polygon convex;
 P O[N];
 
