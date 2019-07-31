@@ -54,18 +54,9 @@ polygon Convex(polygon A) {  // ÇóÍ¹°ü£¬ÄæÊ±ÕëÅÅÐò£¨ ÄÚ½�
 }
 
 const int N=5e2+5;
-ll ans[N][N];
+int ans[N][N];
 bool vis[N][N];
 int mp[N][N];
-
-ll dp(ll l,ll r) {
-	if(l==r||vis[l][r]) return ans[l][r];
-	vis[l][r]=1;
-	for(int kk=l+1;kk<r;kk++)
-		ans[l][r]=max(ans[l][r],dp(l,kk)+dp(kk,r));
-	ans[l][r]+=mp[l][r];
-	return ans[l][r];
-}
 
 polygon convex;
 P O[N];
@@ -93,23 +84,16 @@ int main() {
 				if(yes) mp[i][j]=1;
 			}
 		}
-		cout << dp(0,len-1) << endl;
+		ff(d,2,len-1) {
+			ff(i,0,len-d-1) {
+				int j=i+d;
+				ff(k,i+1,j-1) ans[i][j]=max(ans[i][j],ans[i][k]+ans[k][j]+mp[i][j]);
+			}
+		}
+		cout << ans[0][len-1] << endl;
 	}
-}
-/* stuff you should look for
+}/* stuff you should look for
     * int overflow, array bounds
     * special cases (n=1?), set tle
     * do smth instead of nothing and stay organized
 */
-
-
-
-
-
-
-
-
-
-
-
-
